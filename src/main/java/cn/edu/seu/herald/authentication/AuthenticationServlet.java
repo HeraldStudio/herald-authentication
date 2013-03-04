@@ -45,6 +45,13 @@ public class AuthenticationServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendError(405, "Method GET is not allowed");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {

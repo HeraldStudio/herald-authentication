@@ -25,6 +25,10 @@ public class CommaSeparatedValue {
     private static final String ESCAPED_COMMA = "\\,";
     private StringBuilder builder;
 
+    public CommaSeparatedValue() {
+        builder = new StringBuilder();
+    }
+
     public CommaSeparatedValue append(String value) {
         if (builder.length() > 0) {
             builder.append(COMMA);

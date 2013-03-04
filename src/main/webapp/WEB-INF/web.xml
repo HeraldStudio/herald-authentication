@@ -26,6 +26,6 @@
     </filter-mapping>
     <servlet-mapping>
         <servlet-name>authentication</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 </web-app>

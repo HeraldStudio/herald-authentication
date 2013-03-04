@@ -42,13 +42,23 @@ class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public StudentUser authenticate(String cardNumber, String password) throws AuthenticationException {
+    public StudentUser authenticate(String cardNumber, String password)
+            throws AuthenticationException {
         IdentityManager im = factory.getIdentityManager();
         boolean pass = im.checkPassword(cardNumber, password);
         if (!pass) {
+            String notPass = new StringBuilder()
+                    .append("not authenticated: ")
+                    .append(cardNumber)
+                    .toString();
+            LOGGER.log(Level.INFO, notPass);
             throw new AuthenticationException(cardNumber);
         }
 
+        String msg = new StringBuilder()
+                .append("authenticated: ")
+                .append(cardNumber)
+                .toString();
         String fullName = im.getUserNameByID(cardNumber);
         StudentUser studentUser = new StudentUser(cardNumber, fullName);
         return studentUser;

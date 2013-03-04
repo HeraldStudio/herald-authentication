@@ -16,6 +16,8 @@
 package cn.edu.seu.herald.authentication;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -29,12 +31,16 @@ import javax.servlet.ServletResponse;
  */
 public class CharacterEncodingFilter implements Filter {
 
+    private static final Logger LOGGER = Logger.getLogger(
+            CharacterEncodingFilter.class.getName());
     private String encoding;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         String param = filterConfig.getInitParameter("encoding");
         encoding = (param != null) ? param : "UTF-8";
+        String msg = "encoding: " + encoding;
+        LOGGER.log(Level.INFO, msg);
     }
 
     @Override
@@ -47,5 +53,6 @@ public class CharacterEncodingFilter implements Filter {
             throws IOException, ServletException {
         request.setCharacterEncoding(encoding);
         response.setCharacterEncoding(encoding);
+        chain.doFilter(request, response);
     }
 }

@@ -17,6 +17,8 @@ package cn.edu.seu.herald.authentication;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,12 +31,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AuthenticationServlet extends HttpServlet {
 
+    private static final Logger LOGGER = Logger.getLogger(
+            AuthenticationServlet.class.getName());
     private String configLocation;
     private AuthenticationService authenticationService;
 
     @Override
     public void init(ServletConfig config) {
         configLocation = config.getInitParameter("configLocation");
+        String msg = "config location: " + configLocation;
+        LOGGER.log(Level.INFO, msg);
         authenticationService = new AuthenticationServiceImpl(configLocation);
     }
 

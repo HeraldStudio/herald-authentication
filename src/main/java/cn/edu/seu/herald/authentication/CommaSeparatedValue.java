@@ -33,6 +33,9 @@ public class CommaSeparatedValue {
         if (builder.length() > 0) {
             builder.append(COMMA);
         }
+        if (value == null) {
+            return this;
+        }
         String escapeStr = value.replace(COMMA, ESCAPED_COMMA);
         builder.append(escapeStr);
         return this;

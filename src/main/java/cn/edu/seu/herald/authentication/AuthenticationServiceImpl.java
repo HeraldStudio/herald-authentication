@@ -55,10 +55,6 @@ class AuthenticationServiceImpl implements AuthenticationService {
             throw new AuthenticationException(cardNumber);
         }
 
-        String msg = new StringBuilder()
-                .append("authenticated: ")
-                .append(cardNumber)
-                .toString();
         String fullName = im.getUserNameByID(cardNumber);
         StudentUser studentUser = new StudentUser(cardNumber, fullName);
         return studentUser;
